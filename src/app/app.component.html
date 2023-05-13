@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Forms Reactivos 2</title>
+</head>
+
+<body>
+  <h4 style="text-align:center">Formularios <small>data #2 :)</small></h4>
+  <h5 style="text-align:center">Alan Axel Escobar Calzada</h5>
+  <hr>
+  <form [formGroup]="forma" (ngSubmit)="guardarCambios()" class="needs-validation" novalidate>
+
+    <div class="container">
+      <div class="form-group row ">
+        <label class="col-2 col-form-label">Nombre</label>
+        <div class="col-8">
+          <input class="form-control" [ngClass]="{'is-invalid':!forma.get('nombre')?.valid}" type="text"
+            placeholder="Nombre" formControlName="nombre">
+
+          <div *ngIf="forma.controls['nombre'].errors?.['required']" class="invalid-feedback">
+            El nombre es necesario
+          </div>
+
+          <div *ngIf="forma.controls['nombre'].errors?.['minlength']" class="invalid-feedback">
+            Por lo menos tres caracteres
+          </div>
+
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label class="col-2 col-form-label">Apellido</label>
+        <div class="col-8">
+          <input class="form-control" type="text" placeholder="Apellido" formControlName="apellido">
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label class="col-2 col-form-label">Correo</label>
+        <div class="col-8">
+          <input class="form-control" [ngClass]="{'is-invalid':!forma.get('correo')?.valid }" type="text"
+            placeholder="Correo electronico" formControlName="correo">
+
+          <div *ngIf="forma.controls['correo'].errors?.['required']" class="invalid-feedback">
+            Correo obligatorio
+          </div>
+
+          <div *ngIf="forma.controls['correo'].errors?.['email']" class="invalid-feedback">
+            El correo no tiene el formato correcto
+          </div>
+
+        </div>
+      </div>
+
+
+      <div class="form-group row">
+        <label class="col-2 col-form-label"></label>
+        <div class="input-group col-md-8">
+          <button type="submit" class="btn btn-outline-primary" [disabled]="forma.invalid">
+            Guardar
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="container1">
+      <div *ngIf="forma.valid==true" class="validTrue">El formulario es valido</div>
+      <div *ngIf="forma.valid==false" class="validFalse">El formulario no es valido</div>
+    </div>
+
+  </form>
+</body>
+
+</html>
